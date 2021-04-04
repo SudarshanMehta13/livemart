@@ -14,7 +14,7 @@ const Emitter = require('events')
 
 // Database connection
 
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify : true });
+mongoose.connect('mongodb://localhost:27017/pizza', { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify : true });
 const connection = mongoose.connection;
 connection.once('open', function() {
     console.log('Database connected...');
