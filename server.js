@@ -40,15 +40,19 @@ app.use(session({
     resave: false,
     store: mongoStore,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hour
+    cookie: { maxAge: 1000 * 60 * 60 * 24 , secure: false } // 24 hour
 }))
 
 // Passport config
-const passportInit = require('./app/config/passport')
-passportInit(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
+const passportConfig = require('./app/config/passport')
+passportConfig().init(passport)
+passportConfig().gsignin(passport)
+app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
+    res.redirect('customers/cart');
+  })
 app.use(flash())
 // Assets
 app.use(express.static('public'))

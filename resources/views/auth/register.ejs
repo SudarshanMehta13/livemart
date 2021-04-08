@@ -39,6 +39,36 @@
                 </a>
             </div>
         </form>
+        <div class="mb-6">
+            <button onclick="getLocation()" type="button" color="green" class="btn btn-success">Set Location</button>
+
+            <p id="demo"></p>
+
+            <script>
+                var x = document.getElementById("demo");
+
+                function getLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(position=>{
+                            let lat=position.coords.latitude
+                            let lon=position.coords.longitude
+                            const data={lat,lon}
+                            const options={
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(data)
+                            }
+                            let Promise = fetch('/set-location',options)
+                            console.log(Promise)
+                        })
+                    } else {
+                        x.innerHTML = "Geolocation is not supported by this browser.";
+                    }
+                }
+            </script>
+        </div>
         <p class="text-center text-gray-500 text-xs">
             &copy;2020 Coder's Gyan. All rights reserved.
         </p>
