@@ -12,9 +12,10 @@ const MongoDbStore = require('connect-mongo')(session)
 const passport = require('passport')
 const Emitter = require('events')
 
+
 // Database connection
 
-mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify : true });
+mongoose.connect('mongodb://localhost:27017/pizza', { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify : true });
 const connection = mongoose.connection;
 connection.once('open', function() {
     console.log('Database connected...');
@@ -40,15 +41,19 @@ app.use(session({
     resave: false,
     store: mongoStore,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hour
+    cookie: { maxAge: 1000 * 60 * 60 * 24 , secure: false } // 24 hour
 }))
-
+app.use(require('express-promise')());
 // Passport config
-const passportInit = require('./app/config/passport')
-passportInit(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
+const passportConfig = require('./app/config/passport')
+passportConfig().init(passport)
+passportConfig().gsignin(passport)
+app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
+    res.redirect('customers/cart');
+  })
 app.use(flash())
 // Assets
 app.use(express.static('public'))
