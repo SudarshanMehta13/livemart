@@ -12,6 +12,7 @@ const MongoDbStore = require('connect-mongo')(session)
 const passport = require('passport')
 const Emitter = require('events')
 
+
 // Database connection
 
 mongoose.connect('mongodb://localhost:27017/pizza', { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify : true });
@@ -42,7 +43,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 , secure: false } // 24 hour
 }))
-
+app.use(require('express-promise')());
 // Passport config
 app.use(passport.initialize())
 app.use(passport.session())

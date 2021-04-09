@@ -5,6 +5,7 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const adminOrderController = require('../app/http/controllers/admin/orderController')
 const statusController = require('../app/http/controllers/admin/statusController')
 const menuController=require('../app/http/controllers/menuController')
+const Promise= require('express-promise')
 // Middlewares 
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
@@ -28,10 +29,13 @@ function initRoutes(app) {
     app.get('/customer/orders/:id', auth, orderController().show)
     app.post('/set-location',(req,res)=>{
         try{
-        req.session.cord=JSON.parse(req.body);
-        return new Promise((resolve,reject)=>console.log(req.session.cord))
+        return new Promise(function(resolve,reject){
+            req.session.cord=req.body;
+            resolve("done")
+        })
         }catch(e){
         req.session.cord=req.body;
+        return Promise.resolve(res)
         }
         console.log(res)
     })

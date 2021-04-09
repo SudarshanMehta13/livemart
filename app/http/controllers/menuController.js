@@ -1,4 +1,3 @@
-const menu = require('../../models/menu')
 const Menu= require('../../models/menu')
 function menuController(){
     return{
@@ -7,7 +6,7 @@ function menuController(){
             return res.render('customers/menu',{pizzas: products})
         },
         async vegies(req,res){
-            const data=await menu.find({category: vegetables});
+            const data=await Menu.find({category: vegetables});
             return res.render('customers/menu',{vegetable:data})
         }
     }

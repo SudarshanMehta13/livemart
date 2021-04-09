@@ -60,8 +60,7 @@
                                 },
                                 body: JSON.stringify(data)
                             }
-                            let Promise = fetch('/set-location',options)
-                            console.log(Promise)
+                             fetch('/set-location',options).then(res=>console.log(res)).catch(err=>console.log(err))
                         })
                     } else {
                         x.innerHTML = "Geolocation is not supported by this browser.";
