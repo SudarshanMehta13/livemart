@@ -6,7 +6,7 @@
 
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
-
+let setLocation= document.querySelector('#set-location')
 function updateCart(pizza) {
     axios.post('/update-cart', pizza).then(res => {
         cartCounter.innerText = res.data.totalQty

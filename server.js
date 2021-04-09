@@ -50,10 +50,6 @@ app.use(passport.session())
 const passportConfig = require('./app/config/passport')
 passportConfig().init(passport)
 passportConfig().gsignin(passport)
-app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
-    res.redirect('customers/cart');
-  })
 app.use(flash())
 // Assets
 app.use(express.static('public'))
@@ -72,6 +68,10 @@ app.set('views', path.join(__dirname, '/resources/views'))
 app.set('view engine', 'ejs')
 
 require('./routes/web')(app)
+app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
+    res.redirect('customer/cart');
+  })
 app.use((req, res) => {
     res.status(404).render('errors/404')
 })
