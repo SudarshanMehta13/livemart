@@ -5,12 +5,10 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const adminOrderController = require('../app/http/controllers/admin/orderController')
 const statusController = require('../app/http/controllers/admin/statusController')
 const menuController=require('../app/http/controllers/menuController')
-const Promise= require('express-promise')
 // Middlewares 
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
 const admin = require('../app/http/middlewares/admin')
-const { session } = require('passport')
 
 function initRoutes(app) {
     app.get('/', homeController().index)
@@ -28,16 +26,12 @@ function initRoutes(app) {
     app.get('/customer/orders', auth, orderController().index)
     app.get('/customer/orders/:id', auth, orderController().show)
     app.post('/set-location',(req,res)=>{
-        try{
-        return new Promise(function(resolve,reject){
-            req.session.cord=req.body;
-            resolve("done")
+        req.session.cord=req.body
+        res.json({
+            status: 'Success',
+            lat: req.body.lat,
+            lon: req.body.lon
         })
-        }catch(e){
-        req.session.cord=req.body;
-        return Promise.resolve(res)
-        }
-        console.log(res)
     })
     // Admin routes
     app.get('/admin/orders', admin, adminOrderController().index)

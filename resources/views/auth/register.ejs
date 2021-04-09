@@ -55,12 +55,13 @@
                             const data={lat,lon}
                             const options={
                                 method: 'POST',
+                                credentials: 'include',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify(data)
                             }
-                             fetch('/set-location',options).then(res=>console.log(res)).catch(err=>console.log(err))
+                             fetch('/set-location',options).then(res=>res.json()).catch(json=>console.log(json))
                         })
                     } else {
                         x.innerHTML = "Geolocation is not supported by this browser.";
