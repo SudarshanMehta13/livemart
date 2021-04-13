@@ -6,8 +6,8 @@ function menuController(){
             return res.render('customers/menu',{pizzas: products})
         },
         async vegies(req,res){
-            const data=await Menu.find({category: vegetables});
-            return res.render('customers/menu',{vegetable:data})
+            const data=await Menu.find({category: req.query.category});
+            return res.render('customers/vegies',{items:data})
         }
     }
 }
