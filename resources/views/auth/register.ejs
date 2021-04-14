@@ -31,15 +31,12 @@
                             id="password" type="password" placeholder="******************">
                     </div>
                     <div class="mb-6">
-                        <button onclick="getLocation()"
-                            class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit">
-                            Set Location
-                        </button>
+                        <input type="radio"  name="location" value="Set Location" onclick="getLocation()" required="required">
+                        <label for="location">Set Location</label>
                         <p id="demo"></p>
 
                         <script>
-                            var x = document.getElementById("demo");
+                            var x = document.getElementById("demo").style.color = "grey";
 
                             function getLocation() {
                                 if (navigator.geolocation) {
