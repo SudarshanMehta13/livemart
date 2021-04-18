@@ -1,0 +1,44 @@
+<script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+
+<div class="flex items-center justify-center">
+    <form action="/offlinecustomer" method ="POST" id="xxx_h" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label for="shops" class="inline-block align-baseline font-bold text-sm">
+                Select the shop to visit
+            </label>
+            <select id="shops" name="shops">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+        <div class="flex items-center justify-center" class="mb-4">
+            <label  class="inline-block align-baseline font-bold text-sm">
+                Select the time of visit
+            </label>
+        </div>
+        <div class="flex items-center justify-center" class="mb-4">
+            <input type="datetime-local" id="visittime" name="visittime">
+        </div>
+        <br>
+        <div title="Add to Calendar"  class="addeventatc" .. data-direct="google">
+            Add Event to Calendar
+            <span class="start"><input type="datetime-local"></span>
+            <span class="end"><input type="datetime-local"></span>
+            <span class="timezone">Asia/Kolkata</span>
+            <span class="title">Shopping at LiveMart</span>
+            <span class="description">You have a booked slot to shop at LiveMart Store</span>
+        </div>
+        <br>
+        <br>
+        <div class="flex items-center justify-center" class="mb-4">
+            <button id="xxx"
+                class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                Book the slot
+            </button>
+        </div>
+        
+    </form>
+</div>

@@ -2,6 +2,12 @@ const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const nodemailer = require('nodemailer');
+const app=require('express')()
+const bodyParser=require('body-parser')
+const nunjucks = require('nunjucks')
+const Nexmo = require('nexmo')
+const Vonage = require('@vonage/server-sdk');
+
 function authController() {
     const _getRedirectUrl = (req) => {
         return req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
@@ -32,6 +38,48 @@ function authController() {
                         req.flash('error', info.message ) 
                         return next(err)
                     }
+
+  
+
+            app.use(bodyParser.json())
+            app.use(bodyParser.urlencoded({extended:false}))
+            nunjucks.configure('views',{express:app})
+
+            const nexmo=new Nexmo({
+                apiKey: '6f31b0fe',
+                apiSecret: 'YguhK1iOxUFD1XAT'
+            })
+
+            app.get('/',(req,res)=>{
+                res.render('index.html',{message:'Hello'})
+            })
+
+            app.post('/verify', (req, res) => {
+                nexmo.verify.request({
+                number: req.body.number,
+                brand: 'ACME Corp'
+                }, (err, result) => {
+                if(result.status!=0) {
+                    return res.redirect('/login')
+                } else {
+                    const verifyRequestID=result.request_id
+                    res.render('check.html', { requestId: verifyRequestID })
+                }
+                })
+            })
+
+            app.post('/check', (req, res) => {
+                nexmo.verify.check({
+                request_id: req.body.requestId,
+                code: req.body.code
+                }, (error, result) => {
+                if(result.status != 0) {
+                    return res.redirect('/login')
+                } else {
+                    return res.redirect(_getRedirectUrl(req))
+                }
+                })
+            })
 
                     return res.redirect(_getRedirectUrl(req))
                 })
@@ -100,6 +148,7 @@ function authController() {
          })
         },
         logout(req, res) {
+            delete req.session.cart
           req.logout()
           return res.redirect('/login')  
         }

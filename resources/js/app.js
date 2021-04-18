@@ -4,6 +4,7 @@
  import moment from 'moment'
  import { initStripe } from './stripe'
 
+
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
 let setLocation= document.querySelector('#set-location')
@@ -103,4 +104,3 @@ socket.on('orderUpdated', (data) => {
         progressBar: false,
     }).show();
 })
-

@@ -33,6 +33,14 @@ function initRoutes(app) {
             lon: req.body.lon
         })
     })
+    app.get('/offlinecustomer',(req,res)=>{
+        res.render('customers/offlinecustomer')
+    }
+    )
+    app.post('/offlinecustomer',(req,res)=>{
+        res.redirect('/')
+    }
+    )
     // Admin routes
     app.get('/admin/orders', admin, adminOrderController().index)
     app.post('/admin/order/status', admin, statusController().update)
