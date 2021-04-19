@@ -5,6 +5,7 @@ const orderController = require('../app/http/controllers/customers/orderControll
 const adminOrderController = require('../app/http/controllers/admin/orderController')
 const statusController = require('../app/http/controllers/admin/statusController')
 const menuController=require('../app/http/controllers/menuController')
+const nodemailer = require('nodemailer')
 // Middlewares 
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
@@ -41,10 +42,38 @@ function initRoutes(app) {
         res.redirect('/')
     }
     )
+    app.post('/mailservice',(req,res)=>{
+        console.log(req)
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'livemart.oop@gmail.com',
+              pass: 'password'
+            }
+          });
+          
+          const mailOptions = {
+            from: 'livemart.oop@gmail.com',
+            to: `${req.body.shops}@gmail.com`,
+            subject: 'A Slot Booked',
+            text: `${req.user.name} booked a visiting slot of ${req.body.visittime}`
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+              console.log(req)
+            }
+          });
+          res.redirect('/')
+    })
     // Admin routes
     app.get('/admin/orders', admin, adminOrderController().index)
     app.post('/admin/order/status', admin, statusController().update)
 }
 
 module.exports = initRoutes
+
 

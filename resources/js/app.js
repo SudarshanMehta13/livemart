@@ -5,6 +5,7 @@
  import { initStripe } from './stripe'
 
 
+let formElem = document.getElementById('xxx')
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
 let setLocation= document.querySelector('#set-location')
@@ -104,3 +105,4 @@ socket.on('orderUpdated', (data) => {
         progressBar: false,
     }).show();
 })
+

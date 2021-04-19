@@ -1,16 +1,19 @@
+
+<script data-main="scripts/app" src="scripts/require.js"></script>
 <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
 
 <div class="flex items-center justify-center">
-    <form action="/offlinecustomer" method ="POST" id="xxx_h" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form id="formElem"  action="/mailservice" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div class="mb-4">
+            
             <label for="shops" class="inline-block align-baseline font-bold text-sm">
                 Select the shop to visit
             </label>
             <select id="shops" name="shops">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
+                <option value="sudarshanmehta13">More</option>
+                <option value="Reliance">Reliance</option>
+                <option value="BigBazaar">BigBazaar</option>
+                <option value="Dmart">Dmart</option>
             </select>
         </div>
         <div class="flex items-center justify-center" class="mb-4">
@@ -33,7 +36,7 @@
         <br>
         <br>
         <div class="flex items-center justify-center" class="mb-4">
-            <button id="xxx"
+            <button id="xxx" type="submit"
                 class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                 Book the slot
