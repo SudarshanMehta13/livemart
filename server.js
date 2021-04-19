@@ -70,7 +70,8 @@ app.set('view engine', 'ejs')
 require('./routes/web')(app)
 app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
-    res.redirect('/customer/orders');
+    let red=req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
+    res.redirect(red);
   })
 app.use((req, res) => {
     res.status(404).render('errors/404')

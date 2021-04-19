@@ -7,6 +7,15 @@
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
 let setLocation= document.querySelector('#set-location')
+const but=document.querySelector('#sellform')
+but.addEventListener('submit',(e)=>{
+    new Noty({
+        type: 'success',
+        timeout: 1000,
+        text: 'Item added to Database',
+        progressBar: false,
+    }).show();
+})
 function updateCart(pizza) {
     axios.post('/update-cart', pizza).then(res => {
         cartCounter.innerText = res.data.totalQty

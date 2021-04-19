@@ -1,6 +1,7 @@
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const nodemailer = require('nodemailer');
 function authController() {
     const _getRedirectUrl = (req) => {
         return req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
@@ -42,13 +43,12 @@ function authController() {
         async postRegister(req, res) {
          const { name, email, password }   = req.body
          // Validate request 
-         if(!name || !email || !password) {
+         if(!name || !email || !password ) {
              req.flash('error', 'All fields are required')
              req.flash('name', name)
              req.flash('email', email)
             return res.redirect('/register')
          }
-
          // Check if email exists 
          User.exists({ email: email }, (err, result) => {
              if(result) {
@@ -69,6 +69,29 @@ function authController() {
          })
 
          user.save().then((user) => {
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'livemart.oop@gmail.com',
+                  pass: 'sudarshan@1234'
+                }
+              });
+              
+              const mailOptions = {
+                from: 'livemart.oop@gmail.com',
+                to: user.email,
+                subject: 'Registration Confirmed',
+                text: `Welcome to LiveMart: the Online Grocery Store where we serve the best products at the best price`
+              };
+              
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
             // Login
             return res.redirect('/')
          }).catch(err => {
@@ -77,6 +100,7 @@ function authController() {
          })
         },
         logout(req, res) {
+        delete req.session.cart
           req.logout()
           return res.redirect('/login')  
         }
