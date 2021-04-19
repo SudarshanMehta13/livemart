@@ -9,17 +9,23 @@
                 <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= item.size %></span>
                 <div class="flex items-center justify-around mt-6">
                     <span class="font-bold text-lg">₹<%= item.price %></span>
+<<<<<<< HEAD
                     <% if(item.quantity!=0){%>
+=======
+>>>>>>> 4e47fc42af0064ec70f9afcc9192cdb861526f6b
                     <button data-pizza="<%= JSON.stringify(item) %>"
                         class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
                         <span>+</span>
                         <span class="ml-4">Add</span>
                     </button>
+<<<<<<< HEAD
                     <%}else{%>
                         <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
                             <span class="ml-4">Out of Stock</span>
                         </button>
                     <%}%>
+=======
+>>>>>>> 4e47fc42af0064ec70f9afcc9192cdb861526f6b
                 </div>
             </div>
         </div>
