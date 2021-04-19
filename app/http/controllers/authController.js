@@ -2,11 +2,8 @@ const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const nodemailer = require('nodemailer');
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 4e47fc42af0064ec70f9afcc9192cdb861526f6b
 function authController() {
     const _getRedirectUrl = (req) => {
         return req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
@@ -79,11 +76,7 @@ function authController() {
                 service: 'gmail',
                 auth: {
                   user: 'livemart.oop@gmail.com',
-<<<<<<< HEAD
                   pass: 'sudarshan@1234'
-=======
-                  pass: 'password'
->>>>>>> 4e47fc42af0064ec70f9afcc9192cdb861526f6b
                 }
               });
               
@@ -109,11 +102,7 @@ function authController() {
          })
         },
         logout(req, res) {
-<<<<<<< HEAD
         delete req.session.cart
-=======
-            delete req.session.cart
->>>>>>> 4e47fc42af0064ec70f9afcc9192cdb861526f6b
           req.logout()
           return res.redirect('/login')  
         }
