@@ -25,6 +25,42 @@
   max-width: 90%;
 }
 
+
+.okar1{
+  margin-top:30px;
+  margin-bottom:30px;
+}
+.okar2{
+  margin-bottom:30px;
+}
+.okar3{
+  margin-top:50px;
+}
+.okar4{
+  margin: 20px 80px 25px 80px;
+  display: inline-block;
+  padding: 10px;
+}
+.okar5{
+  margin-top:10px;
+}
+.okar6{
+  background-color: rgb(240, 235, 235);
+  border-color: grey;
+  border-width: .1px;
+  color: black;
+}
+.okar7{
+  margin:100px 500px 100px 600px;
+  
+}
+.okar8{
+  background-color: #080808;
+}
+.okar9{
+  text-transform: uppercase;
+
+}
 #noty_layout__top {
   top: 0;
   left: 5%;

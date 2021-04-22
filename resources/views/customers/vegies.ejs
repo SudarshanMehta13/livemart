@@ -1,9 +1,34 @@
 <section class="menu container mx-auto py-8">
+<<<<<<< HEAD
     <h1 class="text-xl font-bold mb-8">Fresh Vegies</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
         <% items.forEach(function(item) { %>
         <div class="w-full md:w-64">
             <img class="h-40 mb-4 mx-auto" src="/img/<%= item.image %>" alt="">
+=======
+    <form action="/shops" method="POST">
+        <div class="p-8">
+            <div class="bg-white flex items-center rounded-full shadow-xl">
+              <input class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none" id="search" type="text" placeholder="Search" name="name">
+              
+              <div class="p-4">
+                <button type="submit" class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
+                  
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </form>
+    <h1 class="text-xl font-bold mb-8" >
+        <div class="okar9">  <%=  items.length == 0 ?"No Product Available" :items[0].category %>
+        </div>
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
+        <% items.forEach(function(item) { %>
+        <div class="w-full md:w-64">
+            <img class="h-40 mb-4 mx-auto" src="<%= item.image %>" alt="">
+>>>>>>> 729a36b169e3ec2d6369fa44bb56e667101e02bf
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= item.name %></h2>
                 <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= item.size %></span>

@@ -5,8 +5,23 @@ const nodemailer = require('nodemailer');
 
 
 function authController() {
-    const _getRedirectUrl = (req) => {
-        return req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
+    function _getRedirectUrl(req)  {
+        var retrn;
+        if( req.user.role==='admin')
+        {
+            retrn='/admin/orders';
+        }
+        if( req.user.role==='customer')
+        {
+            retrn='/customer/orders';
+        }
+        if( req.user.role==='wholesaler')
+        {
+            retrn='/wholesaler/orders';
+        }
+        return (
+            {retrn}
+        );
     }
     
     return {
@@ -34,8 +49,9 @@ function authController() {
                         req.flash('error', info.message ) 
                         return next(err)
                     }
-
-                    return res.redirect(_getRedirectUrl(req))
+                    var ok=_getRedirectUrl(req);
+                    console.log(ok.retrn);
+                    return res.redirect(ok.retrn)
                 })
             })(req, res, next)
         },
@@ -43,12 +59,14 @@ function authController() {
             res.render('auth/register')
         },
         async postRegister(req, res) {
-         const { name, email, password }   = req.body
+         const { name, email, password, role, number }   = req.body
          // Validate request 
-         if(!name || !email || !password ) {
+         if(!name || !email || !password|| !role || !number ) {
              req.flash('error', 'All fields are required')
              req.flash('name', name)
              req.flash('email', email)
+             req.flash('role', role)
+             req.flash('number', number)
             return res.redirect('/register')
          }
          // Check if email exists 
@@ -57,17 +75,21 @@ function authController() {
                 req.flash('error', 'Email already taken')
                 req.flash('name', name)
                 req.flash('email', email) 
+                req.flash('role', role)
+                req.flash('number', number)
                 return res.redirect('/register')
              }
          })
-
+       // console.log(tel);
          // Hash password 
          const hashedPassword = await bcrypt.hash(password, 10)
          // Create a user 
          const user = new User({
              name,
              email,
-             password: hashedPassword
+             password: hashedPassword,
+             role,
+             number
          })
 
          user.save().then((user) => {

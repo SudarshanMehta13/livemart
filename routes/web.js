@@ -47,8 +47,8 @@ function initRoutes(app) {
         const menu=new Menu({
             name: req.body.itemname,
             category: req.body.category,
-            lat: req.session.cord.lat,
-            lon: req.session.cord.lon,
+            cord: {lat: req.session.cord.lat,
+                    lon: req.session.cord.lon },
             price: req.body.price,
             quantity: req.body.quantity
         }).save().then(res.render('admin/sellform'))

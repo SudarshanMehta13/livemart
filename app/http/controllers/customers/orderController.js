@@ -1,21 +1,55 @@
 const Order = require('../../../models/order')
+const Menu = require('../../../models/menu')
 const moment = require('moment')
+const { query } = require('express')
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 function orderController () {
     return {
         store(req, res) {
             // Validate request
+            console.log(req);
             const { phone, address, stripeToken, paymentType } = req.body
             if(!phone || !address) {
                 return res.status(422).json({ message : 'All fields are required' });
             }
-
+            console.log(req.body)
             const order = new Order({
                 customerId: req.user._id,
                 items: req.session.cart.items,
                 phone,
-                address
+                address,
+                seller: req.session.cart.seller
             })
+            let pp=req.session.cart.items;
+            console.log(pp)
+            // pp.forEach(myFunction);
+            for (var [key, value] of Object.entries(pp))
+           {
+               console.log(value.item._id);
+               console.log(value.qty);
+                var c= Menu.findOneAndUpdate(
+                    {
+                      query: { _id : value.item._id },
+                      update: { $set: { quantity : 2 } },
+                      upsert: true
+                    }
+                 )
+             
+                //  try {
+                //     Menu.findOneAndUpdate(
+                //     {
+                //         query: { _id : value.item._id },
+                //         update: { $set: { quantity : 2 } },
+                //         upsert: true
+                //       }
+                //    )
+                //   }
+                //   catch(e){
+                //      print(e);
+                //   }
+                
+            }
+               
             order.save().then(result => {
                 Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
                     // req.flash('success', 'Order placed successfully')

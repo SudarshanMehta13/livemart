@@ -70,8 +70,21 @@ app.set('view engine', 'ejs')
 require('./routes/web')(app)
 app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
-    let red=req.user.role === 'admin' ? '/admin/orders' : '/customer/orders'
-    res.redirect(red);
+    let retrn;
+        if( req.user.role==='admin')
+        {
+            retrn='/admin/orders';
+        }
+        if( req.user.role==='customer')
+        {
+            retrn='/customer/orders';
+        }
+        if( req.user.role==='wholesaler')
+        {
+            retrn='/wholesaler/orders';
+        }
+        
+    res.redirect(retrn);
   })
 app.use((req, res) => {
     res.status(404).render('errors/404')
@@ -99,3 +112,6 @@ eventEmitter.on('orderPlaced', (data) => {
     io.to('adminRoom').emit('orderPlaced', data)
 })
 
+eventEmitter.on('orderPlaceds', (data) => {
+    io.to('wholesalerRoom').emit('orderPlaceds', data)
+})
