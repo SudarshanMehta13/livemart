@@ -2,45 +2,77 @@
     <div class="w-full max-w-xs">
         <form action="/register" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <% if(messages.error) { %>
-            <span class="text-red-500 text-sm"><%= messages.error %></span>
-            <% } %>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                    Name
-                </label>
-                <input name="name" value="<%= messages.name  %>"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" placeholder="Enter your name">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                    Email
-                </label>
-                <input name="email" value="<%= messages.email  %>"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="email" placeholder="Enter your email">
-            </div>
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                    Password
-                </label>
-                <input name="password"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password" type="password" placeholder="******************">
-            </div>
-            <div class="flex items-center justify-between">
-                <button
-                    class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit">
-                    Register
-                </button>
-                <a class="inline-block align-baseline font-bold text-sm" href="/login">
-                    Already have account?
-                </a>
-            </div>
+                <span class="text-red-500 text-sm">
+                    <%= messages.error %>
+                </span>
+                <% } %>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Name
+                        </label>
+                        <input name="name" value="<%= messages.name  %>"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="username" type="text" placeholder="Enter your name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Email
+                        </label>
+                        <input name="email" value="<%= messages.email  %>"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="email" type="email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                            Password
+                        </label>
+                        <input name="password"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            id="password" type="password" placeholder="******************">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="role">
+                            Role
+                        </label>
+                        <select name="role" class="okar6">
+                            <option value="customer" selected>Customer</option>
+                            <option value="admin" >Retailer</option>
+                            <option value="wholesaler">WholeSaler</option>
+                          </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Phone Number
+                        </label>
+                        <input name="number" 
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                             type="number" id="number" placeholder="91XXXXXXXXXX">
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button name="location"
+                            class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">
+                            Register
+                        </button>
+                        <a class="inline-block align-baseline font-bold text-sm" href="/login">
+                            Already have account?
+                        </a>
+                    </div>
         </form>
+        <div class="flex items-center justify-center">
+            <h3>OR</h3>
+        </div> <br>
+        <div class="flex items-center justify-center">
+            <a href="/auth/google"> <button
+                    class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"> Sign IN with Google </button></a>
+            </a>
+        </div>
         <p class="text-center text-gray-500 text-xs">
-            &copy;2020 Coder's Gyan. All rights reserved.
+            &copy;OOP Project. All rights reserved.
         </p>
     </div>
 </section>
+
+
+

@@ -20,7 +20,8 @@ function cartController() {
                 req.session.cart = {
                     items: {},
                     totalQty: 0,
-                    totalPrice: 0
+                    totalPrice: 0,
+                    seller:req.body.seller
                 }
             }
             let cart = req.session.cart

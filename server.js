@@ -12,6 +12,7 @@ const MongoDbStore = require('connect-mongo')(session)
 const passport = require('passport')
 const Emitter = require('events')
 
+
 // Database connection
 
 mongoose.connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true, useFindAndModify : true });
@@ -40,15 +41,15 @@ app.use(session({
     resave: false,
     store: mongoStore,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hour
+    cookie: { maxAge: 1000 * 60 * 60 * 24 , secure: false } // 24 hour
 }))
-
+app.use(require('express-promise')());
 // Passport config
-const passportInit = require('./app/config/passport')
-passportInit(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
+const passportConfig = require('./app/config/passport')
+passportConfig().init(passport)
+passportConfig().gsignin(passport)
 app.use(flash())
 // Assets
 app.use(express.static('public'))
@@ -67,6 +68,24 @@ app.set('views', path.join(__dirname, '/resources/views'))
 app.set('view engine', 'ejs')
 
 require('./routes/web')(app)
+app.get('/auth/google',passport.authenticate('google', { scope: ['profile'] }))
+app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),function(req, res) {
+    let retrn;
+        if( req.user.role==='admin')
+        {
+            retrn='/admin/orders';
+        }
+        if( req.user.role==='customer')
+        {
+            retrn='/customer/orders';
+        }
+        if( req.user.role==='wholesaler')
+        {
+            retrn='/wholesaler/orders';
+        }
+        
+    res.redirect(retrn);
+  })
 app.use((req, res) => {
     res.status(404).render('errors/404')
 })
@@ -93,3 +112,6 @@ eventEmitter.on('orderPlaced', (data) => {
     io.to('adminRoom').emit('orderPlaced', data)
 })
 
+eventEmitter.on('orderPlaceds', (data) => {
+    io.to('wholesalerRoom').emit('orderPlaceds', data)
+})

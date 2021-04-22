@@ -1,12 +1,22 @@
  import axios from 'axios'
  import Noty from 'noty'
  import { initAdmin } from './admin'
+ import { initWholesaler } from './wholesaler'
  import moment from 'moment'
  import { initStripe } from './stripe'
 
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
-
+let setLocation= document.querySelector('#set-location')
+const but=document.querySelector('#sellform') 
+but.addEventListener('submit',(e)=>{
+    new Noty({
+        type: 'success',
+        timeout: 1000,
+        text: 'Item added to Database',
+        progressBar: false,
+    }).show();
+})
 function updateCart(pizza) {
     axios.post('/update-cart', pizza).then(res => {
         cartCounter.innerText = res.data.totalQty
@@ -89,7 +99,10 @@ if(adminAreaPath.includes('admin')) {
     initAdmin(socket)
     socket.emit('join', 'adminRoom')
 }
-
+if(adminAreaPath.includes('wholesaler')) {
+    initWholesaler(socket)
+    socket.emit('join', 'wholesalerRoom')
+}
 
 socket.on('orderUpdated', (data) => {
     const updatedOrder = { ...order }
