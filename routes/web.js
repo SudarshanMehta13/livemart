@@ -29,6 +29,10 @@ function initRoutes(app) {
     app.get('/items',menuController().vegies)
     app.post('/shops',menuController().vegies1)
     app.get('/update',menuController().update)
+    app.get('/feedback',(req,res)=>{
+      res.render('feedback');
+    }
+      )
     // Customer routes
     app.post('/orders', auth, orderController().store)
     app.get('/customer/orders', auth, orderController().index)
@@ -40,6 +44,9 @@ function initRoutes(app) {
             lat: req.body.lat,
             lon: req.body.lon
         })
+    })
+    app.get('/offers',(req,res)=>{
+      res.render('scratchcard')
     })
     // Admin routes
     app.get('/admin/orders', admin, adminOrderController().index)

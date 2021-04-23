@@ -52,10 +52,7 @@ export function initAdmin(socket) {
                                 <option value="prepared" ${ order.status === 'prepared' ? 'selected' : '' }>
                                     Prepared</option>
                                 <option value="delivered" ${ order.status === 'delivered' ? 'selected' : '' }>
-<<<<<<< HEAD
-=======
                                
->>>>>>> 4e47fc42af0064ec70f9afcc9192cdb861526f6b
                                     Delivered
                                 </option>
                                 <option value="completed" ${ order.status === 'completed' ? 'selected' : '' }>

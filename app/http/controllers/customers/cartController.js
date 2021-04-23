@@ -3,7 +3,8 @@ const { json } = require("express")
 function cartController() {
     return {
         index(req, res) {
-            res.render('customers/cart')
+            console.log(req.query)
+            res.render('customers/cart',{discount: req.query.discount})
         },
         update(req, res) {
             // let cart = {
