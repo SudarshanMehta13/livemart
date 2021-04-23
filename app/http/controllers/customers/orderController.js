@@ -21,19 +21,21 @@ function orderController () {
                 seller: req.session.cart.seller
             })
             let pp=req.session.cart.items;
-            console.log(pp)
-            // pp.forEach(myFunction);
-            for (var [key, value] of Object.entries(pp))
-           {
-               console.log(value.item._id);
-               console.log(value.qty);
-                var c= Menu.findOneAndUpdate(
-                    {
-                      query: { _id : value.item._id },
-                      update: { $set: { quantity : 2 } },
-                      upsert: true
-                    }
-                 )
+            async  function changeValue(value) {
+                console.log(value);
+                return await Menu.findOneAndUpdate(
+                       { _id : value.item._id },
+                         { $inc: { quantity : -value.qty }},
+                        {upsert: true}
+                );
+            };
+            async function fun() {
+                for (var [key, value] of Object.entries(pp)){
+                    console.log(value);
+                   let v=await changeValue(value);
+                 }
+              }
+            let a=fun();
              
                 //  try {
                 //     Menu.findOneAndUpdate(
@@ -47,8 +49,6 @@ function orderController () {
                 //   catch(e){
                 //      print(e);
                 //   }
-                
-            }
                
             order.save().then(result => {
                 Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {

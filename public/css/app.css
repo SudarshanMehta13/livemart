@@ -61,6 +61,17 @@
   text-transform: uppercase;
 
 }
+.vaibhav{
+  visibility: hidden;
+}
+.vaibhav1{
+  display: inline-block;
+  margin-left: 2px;
+}
+.vaibhav2{
+  margin-right:5px;
+  margin-left: 5px;
+}
 #noty_layout__top {
   top: 0;
   left: 5%;

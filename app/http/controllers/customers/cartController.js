@@ -16,6 +16,7 @@ function cartController() {
             //     totalPrice: 0
             // }
             // for the first time creating cart and adding basic object structure
+            console.log(req.body)
             if (!req.session.cart) {
                 req.session.cart = {
                     items: {},
@@ -39,7 +40,7 @@ function cartController() {
                 cart.totalQty = cart.totalQty + 1
                 cart.totalPrice =  cart.totalPrice + req.body.price
             }
-            return res.json({ totalQty: req.session.cart.totalQty })
+            return res.json({ totalQty: req.session.cart.totalQty, cart: req.session.cart })
         }
     }
 }

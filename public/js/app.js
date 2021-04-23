@@ -27656,12 +27656,22 @@ var cartCounter = document.querySelector('#cartCounter');
 function updateCart(pizza) {
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/update-cart', pizza).then(function (res) {
     cartCounter.innerText = res.data.totalQty;
-    new noty__WEBPACK_IMPORTED_MODULE_1___default.a({
-      type: 'success',
-      timeout: 1000,
-      text: 'Item added to cart',
-      progressBar: false
-    }).show();
+    if(res.data.cart.items[pizza._id].qty<pizza.quantity){
+        new noty__WEBPACK_IMPORTED_MODULE_1___default.a({
+        type: 'success',
+        timeout: 1000,
+        text: 'Item added to cart',
+        progressBar: false
+        }).show();
+    }
+    else{
+        new noty__WEBPACK_IMPORTED_MODULE_1___default.a({
+            type: 'error',
+            timeout: 1000,
+            text: 'Item Exceeded',
+            progressBar: false
+            }).show();
+    }
   })["catch"](function (err) {
     new noty__WEBPACK_IMPORTED_MODULE_1___default.a({
       type: 'error',

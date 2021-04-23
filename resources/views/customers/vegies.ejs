@@ -1,11 +1,4 @@
 <section class="menu container mx-auto py-8">
-<<<<<<< HEAD
-    <h1 class="text-xl font-bold mb-8">Fresh Vegies</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 row-gap-16">
-        <% items.forEach(function(item) { %>
-        <div class="w-full md:w-64">
-            <img class="h-40 mb-4 mx-auto" src="/img/<%= item.image %>" alt="">
-=======
     <form action="/shops" method="POST">
         <div class="p-8">
             <div class="bg-white flex items-center rounded-full shadow-xl">
@@ -28,23 +21,30 @@
         <% items.forEach(function(item) { %>
         <div class="w-full md:w-64">
             <img class="h-40 mb-4 mx-auto" src="<%= item.image %>" alt="">
->>>>>>> 729a36b169e3ec2d6369fa44bb56e667101e02bf
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%= item.name %></h2>
                 <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= item.size %></span>
                 <div class="flex items-center justify-around mt-6">
                     <span class="font-bold text-lg">₹<%= item.price %></span>
                     <% if(item.quantity!=0){%>
-                    <button data-pizza="<%= JSON.stringify(item) %>"
-                        class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
-                        <span>+</span>
-                        <span class="ml-4">Add</span>
-                    </button>
-                    <%}else{%>
-                        <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
-                            <span class="ml-4">Out of Stock</span>
+                        <button data-pizza="<%= JSON.stringify(item) %>"
+                            class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                            <span>+</span>
+                            <span class="ml-4">Add</span>
                         </button>
-                    <%}%>
+                        <%}else{%>
+                            <button class=" vaibhav2 add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+                                <span class="  ml-4">Out of Stock</span>
+                            </button>
+                            <p id="currentDate">
+                                
+                            </p>
+                            <script>
+                                var today = new Date();
+                                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDate()+2);
+                                document.getElementById("currentDate").innerHTML = "Next Available On: "+date;
+                              </script>
+                        <%}%>
                 </div>
             </div>
         </div>

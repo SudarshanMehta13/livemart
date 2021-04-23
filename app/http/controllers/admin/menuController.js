@@ -1,3 +1,4 @@
+const { update } = require('../../../models/menu');
 const Menu= require('../../models/menu')
 function menuController(){
     return{

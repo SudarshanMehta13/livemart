@@ -12,13 +12,25 @@ let setLocation= document.querySelector('#set-location')
 
 function updateCart(pizza) {
     axios.post('/update-cart', pizza).then(res => {
+        console.log(res)
+        console.log(pizza)
         cartCounter.innerText = res.data.totalQty
-        new Noty({
-            type: 'success',
-            timeout: 1000,
-            text: 'Item added to cart',
-            progressBar: false,
-        }).show();
+        if(res.data.cart.items[pizza._id].qty<pizza.quantity){
+            new Noty({
+                type: 'success',
+                timeout: 1000,
+                text: 'Item added to cart',
+                progressBar: false,
+            }).show();
+        }
+        else{
+            new Noty({
+                type: 'success',
+                timeout: 1000,
+                text: 'Quantity Exceeded',
+                progressBar: false,
+            }).show();
+        }   
     }).catch(err => {
         new Noty({
             type: 'error',

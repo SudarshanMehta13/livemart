@@ -35,6 +35,7 @@
                 </a></li>
                 <% } else if(user&&user.role=='admin'){ %>
                     <li class="ml-6"><a href="/admin/orders">Orders</a></li>
+                    <li class="ml-6"><a href="/update">Update</a></li>
                     <li class="ml-6"><a href="/menu">Buy</a></li>
                     <li class="ml-6"><a href="/sell">Sell</a></li>
                     <li class="ml-6">
@@ -49,6 +50,7 @@
                     </a></li>
                 <% } else if(user&&user.role=='wholesaler'){ %>
                     <li class="ml-6"><a href="/wholesaler/orders">Orders</a></li>
+                    <li class="ml-6"><a href="/update">Update</a></li>
                     <li class="ml-6"><a href="/wsell">Sell</a></li>
                     <li class="ml-6">
                         <form id="logout" action="/logout" method="POST">

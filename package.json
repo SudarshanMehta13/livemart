@@ -16,7 +16,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@stripe/stripe-js": "^1.10.0",
     "@vonage/server-sdk": "^2.10.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",
@@ -43,7 +43,7 @@
     "two-step-auth": "^1.1.2"
   },
   "devDependencies": {
-    "laravel-mix": "^5.0.4",
+    "laravel-mix": "^6.0.18",
     "nodemon": "^2.0.4",
     "resolve-url-loader": "^3.1.0",
     "sass": "^1.26.9",

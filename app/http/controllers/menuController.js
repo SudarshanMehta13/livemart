@@ -15,7 +15,8 @@ function menuController(){
                         lat:1,
                         lon:1,
                         dis:1,
-                        seller:1
+                        seller:1,
+                        quantity:1,
                 });
                 for (var i in data) {
                     data[i].dis=data[i].lat-data[i].lon;
@@ -36,6 +37,11 @@ function menuController(){
               data.sort((a, b) => (a.dis > b.dis) ? 1 : -1)
             console.log(data)
             return res.render('customers/vegies',{items:data})
+    },
+    async update(req,res){
+        console.log(req.user)
+        const data=await Menu.find({seller: req.user.email});
+        return res.render('update',{items:data})
     }
     }
 }
