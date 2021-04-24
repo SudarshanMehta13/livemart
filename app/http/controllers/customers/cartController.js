@@ -36,7 +36,7 @@ function cartController() {
                 }
                 cart.totalQty = cart.totalQty + 1
                 cart.totalPrice = cart.totalPrice + req.body.price
-            } else {
+            } else if(req.body.quantity > cart.items[req.body._id].qty) {
                 cart.items[req.body._id].qty = cart.items[req.body._id].qty + 1
                 cart.totalQty = cart.totalQty + 1
                 cart.totalPrice =  cart.totalPrice + req.body.price

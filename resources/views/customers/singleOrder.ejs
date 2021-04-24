@@ -17,8 +17,10 @@
                 </li>
                 <li class="status_line text-sm md:text-xl" data-status="completed"><span>Complete</span></li>
             </ul>
+            <br>
+            <br>
             <% if( order.status==="completed") { %>
-                <a href="/feedback">Feedback</a>
+                <a class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" href ="/feedback">Feedback</a>
                 
             <% } %>
         </div>

@@ -2,6 +2,7 @@ const Order = require('../../../models/order')
 const Menu = require('../../../models/menu')
 const moment = require('moment')
 const { query } = require('express')
+const nodemailer = require('nodemailer');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
 function orderController () {
     return {
@@ -37,18 +38,7 @@ function orderController () {
               }
             let a=fun();
              
-                //  try {
-                //     Menu.findOneAndUpdate(
-                //     {
-                //         query: { _id : value.item._id },
-                //         update: { $set: { quantity : 2 } },
-                //         upsert: true
-                //       }
-                //    )
-                //   }
-                //   catch(e){
-                //      print(e);
-                //   }
+            
                
             order.save().then(result => {
                 Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
@@ -79,6 +69,28 @@ function orderController () {
                             return res.json({ message : 'OrderPlaced but payment failed, You can pay at delivery time' });
                         })
                     } else {
+                        const transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                              user: 'livemart.oop@gmail.com',
+                              pass: 'sudarshan@1234'
+                            }
+                          });
+                          
+                          const mailOptions = {
+                            from: 'livemart.oop@gmail.com',
+                            to: req.user.email,
+                            subject: 'Order Confirmed',
+                            text: `Dear ${req.user.name}, your order will be delivered in 2 days by Mr. Mehta.  `
+                          };
+                          
+                          transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                              console.log(error);
+                            } else {
+                              console.log('Email sent: ' + info.response);
+                            }
+                          });
                         delete req.session.cart
                         return res.json({ message : 'Order placed succesfully' });
                     }

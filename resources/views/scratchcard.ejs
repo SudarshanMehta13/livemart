@@ -33,15 +33,17 @@ h2,h1{
 </style>
 </head>
 <body>
-	<h1>Wohooo!!!!</h1>
+  <br><br>
+	<h1 class="okar13">Wohooo!!!!</h1>
+  <br>
 <div class="container1" id="js-container">
   <canvas class="canvas" id="js-canvas" width="300" height="300"></canvas>
   <form class="form" style="visibility: hidden;">
     
     <h2>Hurray you won</h2>
-    <% let num=Math.floor(Math.random() * 40) + 1 
+    <% let num=Math.floor(Math.random() * 10) + 1 
     if(num>0){%>
-	<h1 ><p><%=num%></p>
+	<h1 ><p>₹<%=num%></p>
     </h1>
     <script>
         var dis=getElementById(dis).innerHTML
@@ -167,7 +169,9 @@ h2,h1{
   
 })();
 </script>
-<a href="/cart?discount=<%= num%>"> Continue</a>
+<br>
+<br>
+<a class="okar11 btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" href="/cart?discount=<%= num%>"> Continue</a>
 <%}%>
 </body>
 </html>
