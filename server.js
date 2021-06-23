@@ -63,7 +63,7 @@ app.use((req, res, next) => {
     next()
 })
 // set Template engine
-app.use(expressLayout)
+app.use(expressLayout) // express will now know to use ejs template engine
 app.set('views', path.join(__dirname, '/resources/views'))
 app.set('view engine', 'ejs')
 

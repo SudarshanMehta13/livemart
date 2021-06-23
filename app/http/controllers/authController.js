@@ -35,6 +35,7 @@ function authController() {
                 req.flash('error', 'All fields are required')
                 return res.redirect('/login')
             }
+            // this below function is what we receive from passport.js
             passport.authenticate('local', (err, user, info) => {
                 if(err) {
                     req.flash('error', info.message )
