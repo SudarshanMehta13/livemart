@@ -65,6 +65,7 @@ app.use((req, res, next) => {
 // set Template engine
 app.use(expressLayout) // express will now know to use ejs template engine
 app.set('views', path.join(__dirname, '/resources/views'))
+app.get('*',(req,res)=>res.sendFile(path.join(__dirname, '/resources/views')))
 app.set('view engine', 'ejs')
 
 require('./routes/web')(app)
