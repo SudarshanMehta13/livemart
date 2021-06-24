@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Coder's Gyan",
   "scripts": {
-    
+    "build": "cd resources && npm install && npm run build",
     "serve": "node server.js",
     "dev": "nodemon server.js",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
